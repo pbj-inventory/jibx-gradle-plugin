@@ -1,0 +1,8 @@
+[versions]
+jibx = "1.4.2"
+
+[libraries]
+org-jibx-jibx-bind = { module = "org.jibx:jibx-bind", version.ref = "jibx" }
+org-jibx-jibx-extras = { module = "org.jibx:jibx-extras", version.ref = "jibx" }
+org-jibx-jibx-run = { module = "org.jibx:jibx-run", version.ref = "jibx" }
+org-jibx-jibx-tools = { module = "org.jibx:jibx-tools", version.ref = "jibx" }
