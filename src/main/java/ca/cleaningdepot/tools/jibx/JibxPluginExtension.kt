@@ -2,9 +2,9 @@ package ca.cleaningdepot.tools.jibx
 
 import org.gradle.api.file.FileCollection
 import org.gradle.api.provider.Property
-import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.InputFiles
 
 abstract class JibxPluginExtension {
-    @get:Input
+    @get:InputFiles
     abstract val bindings: Property<FileCollection>
 }
