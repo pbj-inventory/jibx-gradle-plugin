@@ -7,6 +7,7 @@ import org.gradle.api.provider.Property
 import org.gradle.api.tasks.*
 import org.jibx.binding.Compile
 import java.io.File
+import java.net.URLClassLoader
 
 @CacheableTask
 abstract class JibxTask : DefaultTask() {
@@ -34,7 +35,11 @@ abstract class JibxTask : DefaultTask() {
         compiler.setSkipValidate(false)
         compiler.setVerbose(false)
         compiler.setVerify(false)
-        compiler.compile(classpath.get().files.plus(jibxDir).toStringArray(), bindings.get().files.toStringArray())
+        val pluginClasspath =
+            (this::class.java.classLoader as? URLClassLoader)?.urLs?.map { it.toString() } ?: emptyList()
+        val classpath = classpath.get().files.plus(jibxDir).map { it.absolutePath }//
+            .plus(pluginClasspath).toTypedArray()
+        compiler.compile(classpath, bindings.get().files.toStringArray())
     }
 
     private fun Set<File>.toStringArray() = this.map { it.absolutePath }.toTypedArray()
